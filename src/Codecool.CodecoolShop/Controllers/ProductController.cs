@@ -17,18 +17,47 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }
 
+
         public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
                 ProductCategoryDaoMemory.GetInstance());
+
         }
 
+        [Route("/")]
         public IActionResult Index()
-        {
-            var products = ProductService.GetProductsForCategory(1);
+        {  
+            ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
+            ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
+
+            //var products = ProductService.GetProductsForCategory(1);
+            var products = ProductService.GetAllProducts();
             return View(products.ToList());
+        }
+
+        [Route("/bySupplier")]
+        public IActionResult IndexBySupplier(int supplierId)
+        {
+            ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
+            ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
+
+            Supplier supplier = SupplierDaoMemory.GetInstance().Get(supplierId);
+
+            var products = ProductService.GetProductsForSupplier(supplier);
+            return View("Index", products.ToList());
+        }
+
+        [Route("/byCategory")]
+        public IActionResult IndexByCategory(int categoryId)
+        {
+            ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
+            ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
+
+            var products = ProductService.GetProductsForCategory(categoryId);
+            return View("Index", products.ToList());
         }
 
         public IActionResult Privacy()
