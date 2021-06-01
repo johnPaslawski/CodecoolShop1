@@ -3,11 +3,14 @@
 @{ List<ProductCategory> categoriesList = ViewBag.CategoriesList; }
 
 @model List<Codecool.CodecoolShop.Models.Product>
+    <div class="text-md-right">
+        <a asp-controller="cart" asp-action="index" class="btn btn-primary btn-lg">
+            <i class="bi bi-cart"></i> Shopping Cart
+        </a>
+    </div>
 
 <div class="container">
-    <div>
-        @*<a asp-controller="Product" asp-action="IndexBySupplier" type="button" class="btn btn-primary">Supplier number 3</a>*@
-    </div>
+    
     <div class="btn-group-vertical">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
