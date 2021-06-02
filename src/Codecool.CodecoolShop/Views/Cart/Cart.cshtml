@@ -1,17 +1,20 @@
 ﻿<h3>Cart Page</h3>
+
+@model CartViewModel
+
 @if (ViewBag.cart != null)
 {
-    <table cellpadding="2" cellspacing="2" border="1">
-        <tr>
-            <th>Option</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
-        </tr>
-        @foreach (var item in ViewBag.cart)
+<table cellpadding="2" cellspacing="2" border="1">
+    <tr>
+        <th>Option</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Photo</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+    @*@foreach (var item in Model.productsList)
         {
             <tr>
                 <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a></td>
@@ -19,17 +22,30 @@
                 <td>@item.Product.Name</td>
                 <td><img src="~/img/@(item.Product.Name).jpg" width="120" /> </td>
                 <td>@item.Product.DefaultPrice</td>
-                <td>@item.Quantity</td>
+                <td>@item.Quantity </td>
                 <td>@(item.Product.DefaultPrice * item.Quantity)</td>
             </tr>
-        }
+        }*@
+    @for (int i = 0; i < @Model.productsList.Count; i++)
+    {
         <tr>
-            <td align="right" colspan="6">Sum</td>
-            <td>
-                @ViewBag.total
-            </td>
+            <td><a asp-controller="cart" asp-action="remove" asp-route-id="@Model.productsList[i].Product.Id">Remove</a></td>
+            <td>@Model.productsList[i].Product.Id</td>
+            <td>@Model.productsList[i].Product.Name</td>
+            <td><img src="~/img/@(@Model.productsList[i].Product.Name).jpg" width="120" /> </td>
+            <td>@Model.productsList[i].Product.DefaultPrice</td>
+            <td>@Html.EditorFor(x => Model.productsList[i].Quantity) @*@Model.productsList[i].Quantity*@ </td>
+            <td>@(@Model.productsList[i].Product.DefaultPrice * @Model.productsList[i].Quantity)</td>
         </tr>
-    </table>
+    }
+   
+    <tr>
+        <td align="right" colspan="6">Sum</td>
+        <td>
+            @Model.Total
+        </td>
+    </tr>
+</table>
     <br>
     <a asp-controller="product" asp-action="index">Continue Shopping</a>
 }

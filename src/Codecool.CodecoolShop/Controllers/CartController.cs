@@ -26,13 +26,20 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            CartViewModel cartModel = new CartViewModel()
+            {
+                productsList = cart,
+                Total = cart.Sum(x => x.Product.DefaultPrice * x.Quantity)
+            };
+            
             if (cart == null)
             {
-                return View("Cart");
+                return View("Cart", cartModel);
             }
             ViewBag.cart = cart;
-            ViewBag.total = cart.Sum(item => item.Product.DefaultPrice * item.Quantity);
-            return View("Cart");
+            //ViewBag.total = cart.Sum(item => item.Product.DefaultPrice * item.Quantity);
+
+            return View("Cart", cartModel);
         }
         
         [Route("buy/{id}")]
@@ -75,6 +82,12 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Next(List<LineItem> itemsInCart)
+        {
+            int a = 5;
+            return null;
+        }
+
         private int isExist(int id)
         {
             List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
@@ -87,5 +100,7 @@ namespace Codecool.CodecoolShop.Controllers
             }
             return -1;
         }
+
+
     }
 }
