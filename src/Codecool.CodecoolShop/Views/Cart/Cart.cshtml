@@ -35,12 +35,12 @@
                     <td>
                         <div class="def-number-input number-input h5">
                             <button onclick="this.parentNode.querySelector('#@idQuantityString').stepDown(); return false"
-                                    class="btn btn-primary">
+                                    class="btn btn-primary btn-sm">
                                 -
                             </button>
-                            <input asp-for="@Model[i].Quantity" id="@idQuantityString" class="quantity" min="0" max="100" type="number">
+                            <input asp-for="@Model[i].Quantity" id="@idQuantityString" class="btn btn-light font-weight-bolder" min="0" max="100" type="number">
                             <button onclick="this.parentNode.querySelector('#@idQuantityString').stepUp(); return false"
-                                    class="btn btn-primary">
+                                    class="btn btn-primary btn-sm">
                                 +
                             </button>
                         </div> @*@Model.productsList[i].Quantity*@
@@ -60,7 +60,7 @@
                 </td>
             </tr>
         </table>
-        
+
         <div class="text-right">
             <a asp-controller="product" asp-action="index" class="btn btn-outline-secondary "><i class="bi bi-arrow-left-square"></i> Continue shopping</a>
             <button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Checkout @cartItemsCount Item(s) </button>
