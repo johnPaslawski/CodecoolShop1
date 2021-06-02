@@ -27,18 +27,14 @@ namespace Codecool.CodecoolShop.Controllers
         {
             List <LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
-
+          
             if (cart == null)
             {
+                ViewBag.CartItemsCount = 0;
                 return View("Cart");
             }
-
-            //CartViewModel cartModel = new CartViewModel()
-            //{
-            //    productsList = cart,
-            //    Total = cart.Sum(x => x.Product.DefaultPrice * x.Quantity)
-            //};
-
+          
+            ViewBag.CartItemsCount = cart.Count;
             return View("Cart", cart);
             
         }

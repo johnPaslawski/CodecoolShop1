@@ -1,11 +1,12 @@
-﻿<h3>Cart Page</h3>
-
+﻿
 @model List<LineItem>
+@{ int cartItemsCount = ViewBag.CartItemsCount; }
 
+<h4>Shopping Cart</h4>
 @if (Model != null)
 {
     <form method="post" asp-controller="Cart" asp-action="Next">
-        <table class="table" @*cellpadding="5" cellspacing="5" border="0"*@ >
+        <table class="table" @*cellpadding="5" cellspacing="5" border="0"*@>
             <tr>
                 <th>Product:</th>
                 <th></th>
@@ -14,22 +15,7 @@
                 <th>Subtotal:</th>
                 <th></th>
                 @*<th></th>*@
-
             </tr>
-            @*@foreach (var item in Model.productsList)
-                  {
-                      <tr>
-                          <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a></td>
-                          <td>@item.Product.Id</td>
-                          <td>@item.Product.Name</td>
-                          <td><img src="~/img/@(item.Product.Name).jpg" width="120" /> </td>
-                          <td>@item.Product.DefaultPrice</td>
-                          <td>@item.Quantity </td>
-                          <td>@(item.Product.DefaultPrice * item.Quantity)</td>
-                      </tr>
-
-                }*@
-
             @for (int i = 0; i < @Model.Count; i++)
             {
                 @Html.HiddenFor(x => Model[i].Product.Id)
@@ -39,55 +25,60 @@
                 @Html.HiddenFor(x => Model[i].Product.Supplier)
                 @Html.HiddenFor(x => Model[i].Product.Description)
                 @Html.HiddenFor(x => Model[i].Product.Currency)
-
                 string idQuantityString = $"Product{i}_Quantity";
-
                 <tr>
                     @* <td>@Model[i]Product.Id</td>*@
 
                     <td class="h6">@Model[i].Product.Name</td>
                     <td><img src="~/img/@(@Model[i].Product.Name).jpg" width="120" /> </td>
-
                     <td class="h6">@Model[i].Product.DefaultPrice @Model[i].Product.Currency</td>
                     <td>
-
                         <div class="def-number-input number-input h5">
                             <button onclick="this.parentNode.querySelector('#@idQuantityString').stepDown(); return false"
-                                        class="btn btn-primary">
-                                    -
-                                </button>
-                            <input asp-for="@Model[i].Quantity" id="@idQuantityString" class="quantity" min="0" max ="100" type="number">
+                                    class="btn btn-primary">
+                                -
+                            </button>
+                            <input asp-for="@Model[i].Quantity" id="@idQuantityString" class="quantity" min="0" max="100" type="number">
                             <button onclick="this.parentNode.querySelector('#@idQuantityString').stepUp(); return false"
-                                        class="btn btn-primary">
-                                    +
-                                </button>
+                                    class="btn btn-primary">
+                                +
+                            </button>
                         </div> @*@Model.productsList[i].Quantity*@
                     </td>
-
                     <td class="h6">@(@Model[i].Product.DefaultPrice * @Model[i].Quantity) @Model[i].Product.Currency</td>
-                    <td><a class="btn btn-danger" asp-controller="cart" asp-action="remove" asp-route-id="@Model[i].Product.Id"><i class="bi bi-trash"></i></a></td>
+                    <td>
+                        <a class="btn btn-danger" asp-controller="cart" asp-action="remove"
+                           asp-route-id="@Model[i].Product.Id"><i class="bi bi-trash"></i></a>
+                    </td>
                     @*<td></td>*@
                 </tr>
             }
             <tr>
                 <td align="right" colspan="6"><h5>Total:</h5></td>
                 <td class="h5">
-
                     <br>@Model.Sum(x => x.Product.DefaultPrice * x.Quantity) @Model[0].Product.Currency
-
-
                 </td>
             </tr>
         </table>
-        <br>
-        <input type="submit" value="Next step" class="btn btn-primary float-right" /><br>
-    </form><br>
-    <a asp-controller="product" asp-action="index" class="float-right">Continue Shopping</a>
+        
+        <div class="text-right">
+            <a asp-controller="product" asp-action="index" class="btn btn-outline-secondary "><i class="bi bi-arrow-left-square"></i> Continue shopping</a>
+            <button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Checkout @cartItemsCount Item(s) </button>
+        </div>
+    </form>
+
 
 }
 else
 {
     <div>
-        Your cart is empty !
+        <table class="table">
+            <tr>
+                <th>Your cart is empty !</th>
+            </tr>
+            <td>
+                <a asp-controller="product" asp-action="index" class="btn btn-secondary float-left"><i class="bi bi-arrow-left-square"></i> Continue shopping</a>
+            </td>
+        </table>
     </div>
 }
