@@ -25,7 +25,7 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            List <LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
 
             if (cart == null)
@@ -33,13 +33,13 @@ namespace Codecool.CodecoolShop.Controllers
                 return View("Cart");
             }
 
-            CartViewModel cartModel = new CartViewModel()
-            {
-                productsList = cart,
-                Total = cart.Sum(x => x.Product.DefaultPrice * x.Quantity)
-            };
+            //CartViewModel cartModel = new CartViewModel()
+            //{
+            //    productsList = cart,
+            //    Total = cart.Sum(x => x.Product.DefaultPrice * x.Quantity)
+            //};
 
-            return View("Cart", cartModel);
+            return View("Cart", cart);
             
         }
         

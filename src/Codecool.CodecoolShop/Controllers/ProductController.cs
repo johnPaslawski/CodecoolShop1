@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
+using Codecool.CodecoolShop.Helpers;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -17,21 +18,32 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }
 
-
+        
         public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
                 ProductCategoryDaoMemory.GetInstance());
-
+ 
         }
 
         [Route("/")]
         public IActionResult Index()
-        {  
+        {
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
+
+            if (cart == null)
+            {
+                ViewBag.CartItemsCount = 0;
+            }
+            else
+            {
+                ViewBag.CartItemsCount = cart.Count;
+            }
+             
 
             //var products = ProductService.GetProductsForCategory(1);
             var products = ProductService.GetAllProducts();

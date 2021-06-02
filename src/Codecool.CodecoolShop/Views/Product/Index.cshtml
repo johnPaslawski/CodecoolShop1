@@ -1,16 +1,20 @@
 @{ ViewData["Title"] = "Home Page"; }
 @{ List<Supplier> suppliersList = ViewBag.SuppliersList; }
 @{ List<ProductCategory> categoriesList = ViewBag.CategoriesList; }
+@{ int cartItemsCount = ViewBag.CartItemsCount; }
+
+
 
 @model List<Codecool.CodecoolShop.Models.Product>
-    <div class="text-md-right">
-        <a asp-controller="cart" asp-action="index" class="btn btn-primary btn-lg">
-            <i class="bi bi-cart"></i> Shopping Cart
-        </a>
-    </div>
+
+<div class="text-md-right">
+    <a asp-controller="cart" asp-action="index" class="btn btn-primary btn-lg">
+        <i class="bi bi-cart"></i> Shopping Cart (@cartItemsCount)
+    </a>
+</div>
 
 <div class="container">
-    
+
     <div class="btn-group-vertical">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +58,7 @@
             <h5 class="card-title text-center">
                 @*Product*@
                 @*@{ var num = Model.IndexOf(element) + 1;}
-                @num*@
+                    @num*@
             </h5>
             <h5 class="card-title">@element.Name</h5>
             <p class="card-text">@element.Description.</p>
