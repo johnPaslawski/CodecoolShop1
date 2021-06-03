@@ -10,7 +10,8 @@ namespace Codecool.CodecoolShop.Services
     {
         public Order CreateNewOrder(List<LineItem> orderItems, User user)
         {
-            int orderId = new Random().Next(100, 999);
+            //to by dobrze było pobierać z bazy i dawać np o jeden więcej niż p[oprzedni order
+            int orderId = new Random().Next(100, 100000);
             DateTime orderDate = DateTime.Now;
             // do wyjaśnienia - w zależności od logowania gdzie będzie tworzony user, LUB POBIERANY
             // Z ZALOGOWANIA I TYLKO UZUPEŁNIANE JEGO BRAKUJĄCE DANE

@@ -8,9 +8,9 @@ namespace Codecool.CodecoolShop.Models
     public class Payment
     {
         
-        public int CardNumber { get; set; }
+        public long CardNumber { get; set; }
         public string CardHolder { get; set; }
-        public DateTime CardExpiryDate { get; set; }
+        public DateTime( CardExpiryDate { get; set; }
         public int CardCVVCode { get; set; }
     }
 }

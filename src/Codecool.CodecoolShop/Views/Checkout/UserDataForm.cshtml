@@ -2,10 +2,83 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model User
-Tera wezme dane od usera zeby przejsc dalej
+<h5 class="text-center text-danger">You're browsing as a guest!</h5>
+<h6 class="text-center">Provide your data below, or <a class="btn btn-success" href="#">Log in</a> </h6>
 <form asp-controller="Payment" asp-action="Index">
-    <div>@Html.LabelFor(x => Model)</div>
-    <div>@Html.EditorFor(x => Model)</div>
-    <button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Go to payment </button>
-    
+    <h5>Personal data</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>  
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.UserId)</th>
+                <td>@Html.DisplayFor(x => Model.UserId)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.UserName)</th>
+                <td>@Html.EditorFor(x => Model.UserName)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.UserEmail)</th>
+                <td>@Html.EditorFor(x => Model.UserEmail)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.UserPhoneNumber)</th>
+                <td>@Html.EditorFor(x => Model.UserPhoneNumber)</td>
+            </tr>      
+    </table>
+    <h5>Shipping adress: </h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>      
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.ShippingCountry)</th>
+                <td>@Html.EditorFor(x => Model.ShippingCountry)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.ShippingCity)</th>
+                <td>@Html.EditorFor(x => Model.ShippingCity)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.ShippingAdress)</th>
+                <td>@Html.EditorFor(x => Model.ShippingAdress)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.LabelFor(x => Model.ShippingZipcode)</th>
+                <td>@Html.EditorFor(x => Model.ShippingZipcode)</td>
+            </tr>      
+    </table>
+    <h5>Billing adress: </h5>
+    <table class="table">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        <tr>
+            <th scope="row">@Html.LabelFor(x => Model.BillingCountry)</th>
+            <td> @Html.EditorFor(x => Model.BillingCountry)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.LabelFor(x => Model.BillingCity)</th>
+                <td> @Html.EditorFor(x => Model.BillingCity)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.LabelFor(x => Model.BillingAdress)</th>
+            <td> @Html.EditorFor(x => Model.BillingAdress)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.LabelFor(x => Model.BillingZipcode)</th>
+            <td> @Html.EditorFor(x => Model.BillingZipcode)</td>
+        </tr>
+    </table>
+
+    <div class="text-right"><button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Go to payment </button></div>
+
 </form>

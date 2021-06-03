@@ -34,11 +34,19 @@ namespace Codecool.CodecoolShop.Controllers
                 return View("Cart");
             }
           
-            ViewBag.CartItemsCount = cart.Count;
+            ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
             return View("Cart", cart);
             
         }
-        
+
+        public IActionResult SaveCart(List<LineItem> itemsInCart)
+        {
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", itemsInCart);
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
+            return View("Cart", cart);
+        }
+
         [Route("buy/{id}")]
         //sprawdzić czy int id też zadziała, pokombinować z fromQuery itd
         public IActionResult Buy(int id)
@@ -74,6 +82,10 @@ namespace Codecool.CodecoolShop.Controllers
             List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
             int index = isExist(id);
             cart.RemoveAt(index);
+            if (cart.Count == 0)
+            {
+                cart = null;
+            }
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
 
             return RedirectToAction("Index");

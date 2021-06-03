@@ -2,6 +2,44 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model OrderConfirmationView
+<h5>Your order details: </h5>
+<h6 class="text-danger">Before proceeding check if all provided information is correct</h6>
+<table class="table">
+    @for (int i = 0; i < Model.Order.OrderItems.Count; i++)
+    {
+        <tr>
+            <td>@Model.Order.OrderItems[i].Product.Name</td>
+            <td>@Model.Order.OrderItems[i].Quantity</td>
+        </tr>
 
-    <div>@Html.DisplayFor(x => Model.Order)</div>
-    <div>@Html.DisplayFor(x => Model.Payment)</div>
+    }
+    <tr>
+        <td><h5>Total price: </h5>@Model.Order.TotalPrice USD</td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <td><h5>Name:</h5> @Model.Order.OrderUser.UserName</td>
+        <td><h5>Email:</h5> @Model.Order.OrderUser.UserEmail</td>
+        <td><h5>Phone number:</h5> @Model.Order.OrderUser.UserPhoneNumber</td>
+    </tr>
+    <tr>
+        <td>
+            <h5>Shipping adress:</h5> @Model.Order.OrderUser.ShippingAdress @Model.Order.OrderUser.ShippingZipcode
+            @Model.Order.OrderUser.ShippingCity @Model.Order.OrderUser.ShippingCountry
+        </td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <td><h5>Card number:</h5> @Model.Payment.CardNumber</td>
+        <td><h5>Card holder:</h5> @Model.Payment.CardHolder</td>
+        <td><h5>Card expiry date:</h5> @Model.Payment.CardExpiryDate</td>
+        <td><h5>CVV code:</h5> @Model.Payment.CardCVVCode</td>
+
+    </tr>
+</table>
+<a asp-controller="Payment" asp-action="ConfirmOrderAndPayment" type="button"
+   class="btn btn-primary "><i class="bi bi-bag-check-fill h5"></i>Confirm Order & Pay</a>
+<a asp-controller="Payment" asp-action="Index" type="button"
+   class="btn btn-outline-secondary "><i class="bi bi-bag-check-fill h5"></i>Edit order details</a>

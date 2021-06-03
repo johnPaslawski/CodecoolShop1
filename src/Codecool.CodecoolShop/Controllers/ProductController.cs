@@ -41,7 +41,7 @@ namespace Codecool.CodecoolShop.Controllers
             }
             else
             {
-                ViewBag.CartItemsCount = cart.Count;
+                ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
             }
              
 

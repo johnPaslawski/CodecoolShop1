@@ -21,19 +21,20 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index(List<LineItem> itemsInCart)
         {
             // tu będzie wchodziło, kiedy będzie zalogowany już user i będą już jakieś jego dane
+
+            //order neworder = orderservice.createneworder(itemsincart, user);
+            //sessionhelper.setobjectasjson(httpcontext.session, "order", neworder);
+
             return View(itemsInCart);
         }
 
-        public IActionResult FillUserData(List<LineItem> itemsInCart)
+        public IActionResult UserDataForm()
         {
             
             User user = new User();
-            Order newOrder = OrderService.CreateNewOrder(itemsInCart, user);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "order", newOrder);
 
             
 
-            
 
             return View("UserDataForm", user);
         }
