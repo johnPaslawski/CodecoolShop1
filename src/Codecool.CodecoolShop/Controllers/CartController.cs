@@ -79,11 +79,7 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Next(List<LineItem> itemsInCart)
-        {
-            int a = 5;
-            return null;
-        }
+        
 
         private int isExist(int id)
         {

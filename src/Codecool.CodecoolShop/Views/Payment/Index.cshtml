@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Payment
+
+<h4>Payment details: </h4>
+<div>
+    <form asp-controller="Payment" asp-action="OrderConfirmation" method="post">
+        <div>
+            @Html.LabelFor(x => Model.CardNumber)
+            @Html.EditorFor(x => Model.CardNumber)
+        </div>
+        <div>
+            @Html.LabelFor(x => Model.CardHolder)
+            @Html.EditorFor(x => Model.CardHolder)
+        </div>
+        <div>
+            @Html.LabelFor(x => Model.CardExpiryDate)
+            @Html.EditorFor(x => Model.CardExpiryDate)
+        </div>
+        <div>
+            @Html.LabelFor(x => Model.CardCVVCode)
+            @Html.EditorFor(x => Model.CardCVVCode)
+        </div>
+        <button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Prodeed </button>
+    </form>
+    
+</div>

@@ -1,0 +1,11 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model User
+Tera wezme dane od usera zeby przejsc dalej
+<form asp-controller="Payment" asp-action="Index">
+    <div>@Html.LabelFor(x => Model)</div>
+    <div>@Html.EditorFor(x => Model)</div>
+    <button type="submit" class="btn btn-success "><i class="bi bi-bag-check-fill h5"></i> Go to payment </button>
+    
+</form>

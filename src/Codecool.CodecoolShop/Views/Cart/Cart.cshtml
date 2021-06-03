@@ -5,7 +5,7 @@
 <h4>Shopping Cart</h4>
 @if (Model != null)
 {
-    <form method="post" asp-controller="Cart" asp-action="Next">
+    <form method="post" asp-controller="Checkout" asp-action="FillUserData">
         <table class="table" @*cellpadding="5" cellspacing="5" border="0"*@>
             <tr>
                 <th>Product:</th>
