@@ -21,7 +21,7 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult OrderConfirmation(Payment payment)
         {
             
-            var order = SessionHelper.GetObjectFromJson<Order>(HttpContext.Session, "order"); ;
+            var order = SessionHelper.GetObjectFromJson<Order>(HttpContext.Session, "order"); 
             
             OrderConfirmationView orderConfirmView = new OrderConfirmationView(order, payment);
             return View("OrderConfirmation", orderConfirmView);
