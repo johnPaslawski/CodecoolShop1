@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +14,7 @@
 </head>
 <body>
     <header>
-        
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Product" asp-action="Index">Codecool.CodecoolShop</a>
@@ -28,6 +30,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Privacy">Privacy</a>
                         </li>
+                        @*<li>@Context.Session.GetInt32("itemsInCart")</li>*@
                     </ul>
                 </div>
             </div>

@@ -16,7 +16,10 @@ namespace Codecool.CodecoolShop.Services
             // do wyjaśnienia - w zależności od logowania gdzie będzie tworzony user, LUB POBIERANY
             // Z ZALOGOWANIA I TYLKO UZUPEŁNIANE JEGO BRAKUJĄCE DANE
             //User orderUser = new User() { };
-            
+
+            // do zbadania
+            //var newGuid = new Guid();
+
             Order order = new Order(orderId, orderItems, orderDate, user);
 
             return order;

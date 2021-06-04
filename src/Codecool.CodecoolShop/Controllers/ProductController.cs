@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Codecool.CodecoolShop.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -42,8 +43,9 @@ namespace Codecool.CodecoolShop.Controllers
             else
             {
                 ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
+                //HttpContext.Session.SetInt32("itemsInCart", cart.Sum(x => x.Quantity));
             }
-             
+            
 
             //var products = ProductService.GetProductsForCategory(1);
             var products = ProductService.GetAllProducts();

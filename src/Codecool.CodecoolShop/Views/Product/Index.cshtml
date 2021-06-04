@@ -1,3 +1,4 @@
+
 @{ ViewData["Title"] = "Home Page"; }
 @{ List<Supplier> suppliersList = ViewBag.SuppliersList; }
 @{ List<ProductCategory> categoriesList = ViewBag.CategoriesList; }
@@ -7,9 +8,15 @@
 
 @model List<Codecool.CodecoolShop.Models.Product>
 
-<div class="text-md-right">
+<div class="text-right">
     <a asp-controller="cart" asp-action="index" class="btn btn-primary btn-lg">
-        <i class="bi bi-cart"></i> Shopping Cart (@cartItemsCount)
+        <i class="bi bi-cart"></i> Cart
+        @if (cartItemsCount == 0)
+        {
+<span>(@cartItemsCount)</span> }
+else
+{
+<span class="badge badge-danger">@cartItemsCount</span>}
     </a>
 </div>
 
