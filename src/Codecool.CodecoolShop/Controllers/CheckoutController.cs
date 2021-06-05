@@ -29,12 +29,8 @@ namespace Codecool.CodecoolShop.Controllers
         }
 
         public IActionResult UserDataForm()
-        {
-            
+        {          
             User user = new User();
-
-            
-
 
             return View("UserDataForm", user);
         }

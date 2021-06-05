@@ -47,6 +47,4 @@ namespace Codecool.CodecoolShop.Controllers
             return View();
         }
     }
-
-
 }

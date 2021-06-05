@@ -26,8 +26,8 @@ namespace Codecool.CodecoolShop.Controllers
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
                 ProductCategoryDaoMemory.GetInstance());
- 
         }
+
 
         [Route("/")]
         public IActionResult Index()
@@ -52,32 +52,54 @@ namespace Codecool.CodecoolShop.Controllers
             return View(products.ToList());
         }
 
+
         [Route("/bySupplier")]
         public IActionResult IndexBySupplier(int supplierId)
         {
             ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
-
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            if (cart == null)
+            {
+                ViewBag.CartItemsCount = 0;
+            }
+            else
+            {
+                ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
+                //HttpContext.Session.SetInt32("itemsInCart", cart.Sum(x => x.Quantity));
+            }
             Supplier supplier = SupplierDaoMemory.GetInstance().Get(supplierId);
 
             var products = ProductService.GetProductsForSupplier(supplier);
             return View("Index", products.ToList());
         }
 
+
         [Route("/byCategory")]
         public IActionResult IndexByCategory(int categoryId)
         {
             ViewBag.SuppliersList = SupplierDaoMemory.GetInstance().GetAll().ToList();
             ViewBag.CategoriesList = ProductService.GetAllProductCategories().ToList();
-
+            var cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
+            if (cart == null)
+            {
+                ViewBag.CartItemsCount = 0;
+            }
+            else
+            {
+                ViewBag.CartItemsCount = cart.Sum(x => x.Quantity);
+                //HttpContext.Session.SetInt32("itemsInCart", cart.Sum(x => x.Quantity));
+            }
             var products = ProductService.GetProductsForCategory(categoryId);
             return View("Index", products.ToList());
         }
+
 
         public IActionResult Privacy()
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

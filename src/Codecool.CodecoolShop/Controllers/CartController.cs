@@ -15,12 +15,14 @@ namespace Codecool.CodecoolShop.Controllers
     {
         public ProductService ProductService { get; set; }
 
+
         public CartController()
         {
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
                 ProductCategoryDaoMemory.GetInstance());
         }
+
 
         [Route("index")]
         public IActionResult Index()
@@ -39,6 +41,7 @@ namespace Codecool.CodecoolShop.Controllers
             
         }
 
+
         public IActionResult SaveCart(List<LineItem> itemsInCart)
         {
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", itemsInCart);
@@ -47,8 +50,9 @@ namespace Codecool.CodecoolShop.Controllers
             return View("Cart", cart);
         }
 
+
         [Route("buy/{id}")]
-        //sprawdzić czy int id też zadziała, pokombinować z fromQuery itd
+        //pokombinować z [fromQuery], [fromBody] itd
         public IActionResult Buy(int id)
         {
             
@@ -76,6 +80,7 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index");
         }
 
+
         [Route("remove/{id}")]
         public IActionResult Remove(int id)
         {
@@ -92,7 +97,6 @@ namespace Codecool.CodecoolShop.Controllers
         }
 
         
-
         private int isExist(int id)
         {
             List<LineItem> cart = SessionHelper.GetObjectFromJson<List<LineItem>>(HttpContext.Session, "cart");
