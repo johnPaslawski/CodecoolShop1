@@ -71,7 +71,7 @@ else
             <p class="card-text">@element.Description.</p>
             <p class="card-text">Category: @element.ProductCategory.Department</p>
             <p class="card-text">Supplier: @element.Supplier.Name</p>
-            <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
+            <p class="card-text text-center"><strong>Price: @element.DefaultPrice @element.Currency@*.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"))*@</strong></p>
             <a asp-controller="cart" asp-action="buy" asp-route-id="@element.Id" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
         </div>
     </div>

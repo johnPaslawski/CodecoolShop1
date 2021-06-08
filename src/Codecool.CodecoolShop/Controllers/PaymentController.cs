@@ -42,6 +42,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult ConfirmOrderAndPayment()
         {
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", null);
             var jsondlaadmina = SessionHelper.GetObjectFromJson<OrderConfirmationView>(HttpContext.Session, "podsumowaniewszystkiego");
             
             return View();
